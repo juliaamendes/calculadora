@@ -1,0 +1,300 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            font-family: Arial, sans-serif;
+        }
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .calculator .display {
+            grid-column: span 4;
+            background-color: black;
+            color: white;
+            font-size: 3em;
+            text-align: right;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .calculator button {
+            font-size: 1.5em;
+            border: none;
+            border-radius: 50%;
+            padding: 20px;
+            cursor: pointer;
+        }
+        .calculator button.operator {
+            background-color: orange;
+            color: white;
+        }
+        .calculator button.function {
+            background-color: #a5a5a5;
+            color: black;
+        }
+        .calculator button.number {
+            background-color: #333;
+            color: white;
+        }
+        .calculator button.zero {
+            grid-column: span 2;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <button class="function" onclick="clearDisplay()">AC</button>
+        <button class="function" onclick="toggleSign()">+/-</button>
+        <button class="function" onclick="inputOperator('%')">%</button>
+        <button class="operator" onclick="inputOperator('/')">÷</button>
+        <button class="number" onclick="inputNumber(7)">7</button>
+        <button class="number" onclick="inputNumber(8)">8</button>
+        <button class="number" onclick="inputNumber(9)">9</button>
+        <button class="operator" onclick="inputOperator('*')">×</button>
+        <button class="number" onclick="inputNumber(4)">4</button>
+        <button class="number" onclick="inputNumber(5)">5</button>
+        <button class="number" onclick="inputNumber(6)">6</button>
+        <button class="operator" onclick="inputOperator('-')">-</button>
+        <button class="number" onclick="inputNumber(1)">1</button>
+        <button class="number" onclick="inputNumber(2)">2</button>
+        <button class="number" onclick="inputNumber(3)">3</button>
+        <button class="operator" onclick="inputOperator('+')">+</button>
+        <button class="number zero" onclick="inputNumber(0)">0</button>
+        <button class="number" onclick="inputDecimal()">.</button>
+        <button class="operator" onclick="calculate()">=</button>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '0';
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            font-family: Arial, sans-serif;
+        }
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .calculator .display {
+            grid-column: span 4;
+            background-color: black;
+            color: white;
+            font-size: 3em;
+            text-align: right;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .calculator button {
+            font-size: 1.5em;
+            border: none;
+            border-radius: 50%;
+            padding: 20px;
+            cursor: pointer;
+        }
+        .calculator button.operator {
+            background-color: orange;
+            color: white;
+        }
+        .calculator button.function {
+            background-color: #a5a5a5;
+            color: black;
+        }
+        .calculator button.number {
+            background-color: #333;
+            color: white;
+        }
+        .calculator button.zero {
+            grid-column: span 2;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <button class="function" onclick="clearDisplay()">AC</button>
+        <button class="function" onclick="toggleSign()">+/-</button>
+        <button class="function" onclick="inputOperator('%')">%</button>
+        <button class="operator" onclick="inputOperator('/')">÷</button>
+        <button class="number" onclick="inputNumber(7)">7</button>
+        <button class="number" onclick="inputNumber(8)">8</button>
+        <button class="number" onclick="inputNumber(9)">9</button>
+        <button class="operator" onclick="inputOperator('*')">×</button>
+        <button class="number" onclick="inputNumber(4)">4</button>
+        <button class="number" onclick="inputNumber(5)">5</button>
+        <button class="number" onclick="inputNumber(6)">6</button>
+        <button class="operator" onclick="inputOperator('-')">-</button>
+        <button class="number" onclick="inputNumber(1)">1</button>
+        <button class="number" onclick="inputNumber(2)">2</button>
+        <button class="number" onclick="inputNumber(3)">3</button>
+        <button class="operator" onclick="inputOperator('+')">+</button>
+        <button class="number zero" onclick="inputNumber(0)">0</button>
+        <button class="number" onclick="inputDecimal()">.</button>
+        <button class="operator" onclick="calculate()">=</button>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '0';
+        let operator = null;
+        let previousInput = null;
+
+        function updateDisplay() {
+            display.innerText = currentInput;
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            operator = null;
+            previousInput = null;
+            updateDisplay();
+        }
+
+        function inputNumber(number) {
+            if (currentInput === '0') {
+                currentInput = String(number);
+            } else {
+                currentInput += String(number);
+            }
+            updateDisplay();
+        }
+
+        function inputDecimal() {
+            if (!currentInput.includes('.')) {
+                currentInput += '.';
+            }
+            updateDisplay();
+        }
+
+        function inputOperator(op) {
+            if (operator !== null) {
+                calculate();
+            }
+            previousInput = currentInput;
+            currentInput = '0';
+            operator = op;
+        }
+
+        function calculate() {
+            let result;
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+
+            if (isNaN(prev) || isNaN(current)) return;
+
+            switch (operator) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
+                    break;
+                case '*':
+                    result = prev * current;
+                    break;
+                case '/':
+                    result = prev / current;
+                    break;
+                case '%':
+                    result = prev % current;
+                    break;
+                default:
+                    return;
+            }
+
+            currentInput = String(result);
+            operator = null;
+            previousInput = null;
+            updateDisplay();
+        }
+
+        function toggleSign() {
+            currentInput = String(parseFloat(currentInput) * -1);
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>￼Enter        let operator = null;
+        let previousInput = null;
+
+        function updateDisplay() {
+            display.innerText = currentInput;
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            operator = null;
+            previousInput = null;
+            updateDisplay();
+        }
+
+        function inputNumber(number) {
+            if (currentInput === '0') {
+                currentInput = String(number);
+            } else {
+                currentInput += String(number);
+            }
+            updateDisplay();
+        }
+
+        function inputDecimal() {
+            if (!currentInput.includes('.')) {
+                currentInput += '.';
+      }
+            updateDisplay();
+        }
+
+        function inputOperator(op) {
+            if (operator !== null) {
+                calculate();
+            }
+            previousInput = currentInput;
+            currentInput = '0';
+            operator = op;
+        }
+
+        function calculate() {
+            let result;
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+
+            if (isNaN(prev) || isNaN(current)) return;
+
+            switch (operator) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
